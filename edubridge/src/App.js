@@ -10,6 +10,8 @@ import Footer from "./components/Footer";
 import Contact from "./components/Contact";
 import StudyPage from "./pages/StudyPage";
 import LanguageSwitcher from "./components/LanguageSwitcher";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
 
 function Home() {
   return (
@@ -34,6 +36,8 @@ function App() {
     <Routes>
   <Route path="/" element={<Home />} />
   <Route path="/study" element={<StudyPage />} />
+  <Route path="/login" element={<LoginPage />} />
+  <Route path="/register" element={<RegisterPage />} />
     </Routes>
   );
 }

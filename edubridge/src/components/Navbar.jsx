@@ -78,6 +78,22 @@ export default function Navbar({ minimal = false }) {
               );
             })
           )}
+          {!minimal && (
+            <div className="ml-4 flex items-center gap-3">
+              <Link
+                to="/login"
+                className="text-sm inline-flex items-center h-8 px-3 rounded-md border border-brand-600 text-brand-700 hover:bg-brand-50"
+              >
+                Login
+              </Link>
+              <Link
+                to="/register"
+                className="text-sm inline-flex items-center h-8 px-3 rounded-md border border-brand-600 text-brand-700 hover:bg-brand-50"
+              >
+                Sign up
+              </Link>
+            </div>
+          )}
         </div>
         <button
           className="md:hidden inline-flex items-center justify-center h-9 w-9 rounded-md border border-gray-200"
@@ -113,6 +129,24 @@ export default function Navbar({ minimal = false }) {
                   </a>
                 );
               })
+            )}
+            {!minimal && (
+              <div className="pt-2 flex items-center gap-4">
+                <Link
+                  to="/login"
+                  onClick={() => setOpen(false)}
+                  className="text-sm inline-flex items-center h-9 px-3 rounded-md border border-brand-600 text-brand-700 hover:bg-brand-50"
+                >
+                  Login
+                </Link>
+                <Link
+                  to="/register"
+                  onClick={() => setOpen(false)}
+                  className="text-sm inline-flex items-center h-9 px-3 rounded-md border border-brand-600 text-brand-700 hover:bg-brand-50"
+                >
+                  Sign up
+                </Link>
+              </div>
             )}
           </div>
         </div>
