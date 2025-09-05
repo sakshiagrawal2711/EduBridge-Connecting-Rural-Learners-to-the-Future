@@ -48,18 +48,28 @@ function normalizeRole(role) {
   return typeof role === "string" ? role.toUpperCase() : role;
 }
 
+// 🔹 LOGIN
 export async function loginApi({ email, password, role }) {
   const formData = new FormData();
   formData.append("email", email);
   formData.append("password", password);
   formData.append("role", normalizeRole(role));
 
-  return apiFetch(endpoints.login, {
+  const data = await apiFetch(endpoints.login, {
     method: "POST",
     body: formData,
   });
+
+  // Save full user info + token
+  if (data?.token) {
+    localStorage.setItem("edubridge:authToken", data.token);
+    localStorage.setItem("edubridge:user", JSON.stringify(data));
+  }
+
+  return data;
 }
 
+// 🔹 REGISTER
 export async function registerApi({ username, email, password, role }) {
   const formData = new FormData();
   formData.append("username", username);
@@ -67,8 +77,31 @@ export async function registerApi({ username, email, password, role }) {
   formData.append("password", password);
   formData.append("role", normalizeRole(role));
 
-  return apiFetch(endpoints.register, {
+  const data = await apiFetch(endpoints.register, {
     method: "POST",
     body: formData,
   });
+
+  // Save full user info + token
+  if (data?.token) {
+    localStorage.setItem("edubridge:authToken", data.token);
+    localStorage.setItem("edubridge:user", JSON.stringify(data));
+  }
+
+  return data;
+}
+
+// 🔹 Get current user from localStorage
+export function getCurrentUser() {
+  try {
+    return JSON.parse(localStorage.getItem("edubridge:user"));
+  } catch {
+    return null;
+  }
+}
+
+// 🔹 Logout
+export function logout() {
+  localStorage.removeItem("edubridge:authToken");
+  localStorage.removeItem("edubridge:user");
 }
