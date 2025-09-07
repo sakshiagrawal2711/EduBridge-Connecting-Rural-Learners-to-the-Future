@@ -3,8 +3,6 @@ import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Features from "./components/Features";
-import Timeline from "./components/Timeline";
-import Team from "./components/Team";
 import FAQs from "./components/FAQs";
 import Footer from "./components/Footer";
 import Contact from "./components/Contact";
@@ -20,8 +18,6 @@ function Home() {
       <main className="pt-20">
         <Hero />
         <Features />
-        <Timeline />
-        <Team />
         <FAQs />
         <Contact />
       </main>

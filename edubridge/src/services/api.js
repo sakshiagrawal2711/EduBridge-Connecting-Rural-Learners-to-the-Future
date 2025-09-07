@@ -2,9 +2,8 @@
 const BASE_URL = process.env.REACT_APP_API_BASE_URL || "http://localhost:8080";
 
 export const endpoints = {
-  // Adjust these if your backend uses different paths
-  login: "/api/login",
-  register: "/api/register",
+  login: "/api/auth/login",
+  register: "/api/auth/register",
 };
 
 function getToken() {
@@ -20,7 +19,6 @@ export async function apiFetch(path, options = {}) {
   const token = getToken();
 
   const headers = {
-    "Content-Type": "application/json",
     ...(token ? { Authorization: `Bearer ${token}` } : {}),
     ...(options.headers || {}),
   };
@@ -34,7 +32,10 @@ export async function apiFetch(path, options = {}) {
     data = text;
   }
   if (!res.ok) {
-    const message = (data && (data.message || data.error)) || res.statusText || "Request failed";
+    const message =
+      (data && (data.message || data.error)) ||
+      res.statusText ||
+      "Request failed";
     const err = new Error(message);
     err.status = res.status;
     err.data = data;
@@ -47,16 +48,60 @@ function normalizeRole(role) {
   return typeof role === "string" ? role.toUpperCase() : role;
 }
 
+// 🔹 LOGIN
 export async function loginApi({ email, password, role }) {
-  return apiFetch(endpoints.login, {
+  const formData = new FormData();
+  formData.append("email", email);
+  formData.append("password", password);
+  formData.append("role", normalizeRole(role));
+
+  const data = await apiFetch(endpoints.login, {
     method: "POST",
-    body: JSON.stringify({ email, password, role: normalizeRole(role) }),
+    body: formData,
   });
+
+  // Save full user info + token
+  if (data?.token) {
+    localStorage.setItem("edubridge:authToken", data.token);
+    localStorage.setItem("edubridge:user", JSON.stringify(data));
+  }
+
+  return data;
 }
 
-export async function registerApi({ name, email, password, role }) {
-  return apiFetch(endpoints.register, {
+// 🔹 REGISTER
+export async function registerApi({ username, email, password, role }) {
+  const formData = new FormData();
+  formData.append("username", username);
+  formData.append("email", email);
+  formData.append("password", password);
+  formData.append("role", normalizeRole(role));
+
+  const data = await apiFetch(endpoints.register, {
     method: "POST",
-    body: JSON.stringify({ name, email, password, role: normalizeRole(role) }),
+    body: formData,
   });
+
+  // Save full user info + token
+  if (data?.token) {
+    localStorage.setItem("edubridge:authToken", data.token);
+    localStorage.setItem("edubridge:user", JSON.stringify(data));
+  }
+
+  return data;
+}
+
+// 🔹 Get current user from localStorage
+export function getCurrentUser() {
+  try {
+    return JSON.parse(localStorage.getItem("edubridge:user"));
+  } catch {
+    return null;
+  }
+}
+
+// 🔹 Logout
+export function logout() {
+  localStorage.removeItem("edubridge:authToken");
+  localStorage.removeItem("edubridge:user");
 }
