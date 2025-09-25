@@ -3,12 +3,12 @@ import { useI18n } from "../i18n/LanguageProvider";
 
 const items = [
   { key: "study", title: "Study Materials", desc: "Access curated resources.", icon: "📘", href: "/study" },
-  { key: "mentor", title: "Mentor Access", desc: "Connect with mentors.", icon: "🧑‍🏫" },
-  { key: "progress", title: "Monitoring Skill Progress", desc: "Track learning milestones and outcomes.", icon: "📈" },
-  { key: "bridge", title: "Bridging Digital Divide", desc: "Offline-friendly content and local access points.", icon: "🌐" },
-  { key: "finance", title: "Grants, Loans & Incentives Info", desc: "Discover funding opportunities and schemes.", icon: "💸" },
-  { key: "career", title: "Employment & Career Support", desc: "Placement guidance and job-readiness tips.", icon: "🧭" },
-  { key: "research", title: "Research & Resource Sharing", desc: "Collaborate and share findings with peers.", icon: "🔬" }
+  { key: "mentor", title: "Mentor Access", desc: "Connect with mentors.", icon: "🧑‍🏫", href: "/mentor" },
+  { key: "progress", title: "Monitoring Skill Progress", desc: "Track learning milestones and outcomes.", icon: "📈", href: "/progress" },
+  { key: "bridge", title: "Bridging Digital Divide", desc: "Offline-friendly content and local access points.", icon: "🌐", href: "/bridge" },
+  { key: "finance", title: "Grants, Loans & Incentives Info", desc: "Discover funding opportunities and schemes.", icon: "💸", href: "/finance" },
+  { key: "career", title: "Employment & Career Support", desc: "Placement guidance and job-readiness tips.", icon: "🧭", href: "/career" },
+  { key: "research", title: "Research & Resource Sharing", desc: "Collaborate and share findings with peers.", icon: "🔬", href: "/research" }
 ];
 
 export default function Features() {

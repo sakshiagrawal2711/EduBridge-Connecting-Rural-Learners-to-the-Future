@@ -23,9 +23,12 @@ export default function LoginPage() {
       // Store user object directly
       localStorage.setItem("edubridge:user", JSON.stringify(res));
 
-      // If backend sends token later
+      // If backend sends token, use it; otherwise create a mock one for demo
       if (res?.token) {
         localStorage.setItem("edubridge:authToken", res.token);
+      } else {
+        // Create a mock token for demo purposes
+        localStorage.setItem("edubridge:authToken", "demo-token-" + Date.now());
       }
 
       window.location.href = "/";

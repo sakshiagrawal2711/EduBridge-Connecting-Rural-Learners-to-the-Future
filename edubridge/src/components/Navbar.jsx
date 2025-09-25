@@ -1,14 +1,13 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useI18n } from "../i18n/LanguageProvider";
-import { getCurrentUser, logout } from "../services/api"; // ⬅️ added
+import { isAuthenticated, getAuthUser, logout } from "../utils/auth";
 
 const links = [
   { href: "#home", label: "Home" },
   { href: "#features", label: "Features" },
-  { href: "#timeline", label: "Timeline" },
-  { href: "#team", label: "Team" },
-  { href: "#faqs", label: "FAQs" }
+  { href: "#faqs", label: "FAQs" },
+  { href: "#contact", label: "Contact" }
 ];
 
 export default function Navbar({ minimal = false }) {
@@ -17,10 +16,18 @@ export default function Navbar({ minimal = false }) {
   const [active, setActive] = useState("home");
   const { t } = useI18n();
 
-  const user = getCurrentUser(); // ⬅️ check if logged in
+  const isLoggedIn = isAuthenticated();
+  const user = getAuthUser();
+
+  const handleLogout = () => {
+    if (window.confirm("Are you sure you want to logout?")) {
+      logout();
+      window.location.reload();
+    }
+  };
 
   const sectionIds = useMemo(
-    () => (minimal ? [] : ["home", "features", "timeline", "team", "faqs"]),
+    () => (minimal ? [] : ["home", "features", "faqs", "contact"]),
     [minimal]
   );
 
@@ -106,10 +113,7 @@ export default function Navbar({ minimal = false }) {
                 👋 Welcome, <b>{user.username}</b>
               </span>
               <button
-                onClick={() => {
-                  logout();
-                  window.location.reload();
-                }}
+                onClick={handleLogout}
                 className="text-sm inline-flex items-center h-8 px-3 rounded-md border border-red-600 text-red-700 hover:bg-red-50"
               >
                 Logout

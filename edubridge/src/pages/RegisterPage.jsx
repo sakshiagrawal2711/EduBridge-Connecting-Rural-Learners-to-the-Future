@@ -20,11 +20,24 @@ export default function RegisterPage() {
     try {
       setLoading(true);
       const res = await registerApi({ username, email, password, role }); // changed here
+      
+      // Store token if provided, otherwise create mock for demo
       if (res?.token) {
         localStorage.setItem("edubridge:authToken", res.token);
+      } else {
+        localStorage.setItem("edubridge:authToken", "demo-token-" + Date.now());
       }
+      
+      // Store user data
       if (res?.user) {
         localStorage.setItem("edubridge:user", JSON.stringify(res.user));
+      } else {
+        // Create mock user object for demo
+        localStorage.setItem("edubridge:user", JSON.stringify({
+          username,
+          email,
+          role
+        }));
       }
       window.location.href = "/";
     } catch (err) {

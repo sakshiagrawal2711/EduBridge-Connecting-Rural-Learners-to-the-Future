@@ -2,7 +2,7 @@ import React, { createContext, useContext, useMemo, useState, useEffect } from "
 
 const translations = {
   en: {
-    nav: { home: "Home", features: "Features", timeline: "Timeline", team: "Team", faqs: "FAQs", language: "Language" },
+    nav: { home: "Home", features: "Features", faqs: "FAQs", contact: "Contact", language: "Language" },
     features: { title: "Features", subtitle: "These features are in development — click any card to see the status.", open: "Open", comingSoon: "Coming soon", countdown: "Countdown", gotIt: "Got it" },
     contact: { title: "Contact", subtitle: "Have a question or want to collaborate? Send us a message.", send: "Send message" },
     study: { title: "Study Materials", subtitle: "Filter by class and subject, search, bookmark, or download.", class: "Class", subject: "Subject", sort: "Sort", sortClassAsc: "Class (Low → High)", sortClassDesc: "Class (High → Low)", sortTitle: "Title (A → Z)", search: "Search", view: "View", download: "Download" },
@@ -21,7 +21,7 @@ const translations = {
     footer: { text: "CSE241 – EduBridge | Capstone Project Review 2" }
   },
   hi: {
-    nav: { home: "होम", features: "विशेषताएँ", timeline: "समयरेखा", team: "टीम", faqs: "प्रश्न", language: "भाषा" },
+    nav: { home: "होम", features: "विशेषताएँ", faqs: "प्रश्न", contact: "संपर्क", language: "भाषा" },
     features: { title: "विशेषताएँ", subtitle: "ये सुविधाएँ निर्माण में हैं — स्थिति देखने के लिए किसी भी कार्ड पर क्लिक करें।", open: "खोलें", comingSoon: "जल्द आ रहा है", countdown: "काउंटडाउन", gotIt: "ठीक है" },
     contact: { title: "संपर्क", subtitle: "कोई प्रश्न है या सहयोग करना चाहते हैं? हमें संदेश भेजें।", send: "भेजें" },
     study: { title: "अध्ययन सामग्री", subtitle: "कक्षा और विषय के अनुसार फ़िल्टर करें, खोजें, बुकमार्क करें या डाउनलोड करें।", class: "कक्षा", subject: "विषय", sort: "क्रमबद्ध करें", sortClassAsc: "कक्षा (छोटे से बड़े)", sortClassDesc: "कक्षा (बड़े से छोटे)", sortTitle: "शीर्षक (A → Z)", search: "खोजें", view: "देखें", download: "डाउनलोड" },
@@ -39,15 +39,15 @@ const translations = {
     },
     footer: { text: "CSE241 – EduBridge | कैपस्टोन प्रोजेक्ट रिव्यू 2" }
   },
-  ta: { nav: { home: "முகப்பு", features: "அம்சங்கள்", timeline: "காலவரிசை", team: "அணி", faqs: "கேள்விகள்", language: "மொழி" } },
-  te: { nav: { home: "హోమ్", features: "లక్షణాలు", timeline: "సమయరేఖ", team: "బృందం", faqs: "ప్రశ్నలు", language: "భాష" } },
-  bn: { nav: { home: "হোম", features: "বৈশিষ্ট্য", timeline: "সময়রেখা", team: "টিম", faqs: "প্রশ্ন", language: "ভাষা" } },
-  mr: { nav: { home: "मुख्यपृष्ठ", features: "वैशिष्ट्ये", timeline: "वेळापत्रक", team: "संघ", faqs: "प्रश्न", language: "भाषा" } },
-  gu: { nav: { home: "મુખ્ય", features: "વિશેષતાઓ", timeline: "સમયરેખા", team: "ટીમ", faqs: "પ્રશ્નો", language: "ભાષા" } },
-  kn: { nav: { home: "ಮುಖಪುಟ", features: "ವೈಶಿಷ್ಟ್ಯಗಳು", timeline: "ಟೈಮ್‌ಲೈನ್", team: "ತಂಡ", faqs: "ಪ್ರಶ್ನೆಗಳು", language: "ಭಾಷೆ" } },
-  ml: { nav: { home: "ഹോം", features: "സവിശേഷതകൾ", timeline: "ടൈംലൈൻ", team: "ടീം", faqs: "ചോദ്യങ്ങൾ", language: "ഭാഷ" } },
-  pa: { nav: { home: "ਘਰ", features: "ਫੀਚਰ", timeline: "ਟਾਈਮਲਾਈਨ", team: "ਟੀਮ", faqs: "ਸਵਾਲ", language: "ਭਾਸ਼ਾ" } },
-  or: { nav: { home: "ମୁଖ୍ୟ", features: "ବିଶେଷତା", timeline: "ସମୟରେଖା", team: "ଟିମ୍", faqs: "ପ୍ରଶ୍ନ", language: "ଭାଷା" } }
+  ta: { nav: { home: "முகப்பு", features: "அம்சங்கள்", faqs: "கேள்விகள்", contact: "தொடர்பு", language: "மொழி" } },
+  te: { nav: { home: "హోమ్", features: "లక్షణాలు", faqs: "ప్రశ్నలు", contact: "సంప్రదించండి", language: "భాష" } },
+  bn: { nav: { home: "হোম", features: "বৈশিষ্ট্য", faqs: "প্রশ্ন", contact: "যোগাযোগ", language: "ভাষা" } },
+  mr: { nav: { home: "मुख्यपृष्ठ", features: "वैशिष्ट्ये", faqs: "प्रश्न", contact: "संपर्क", language: "भाषा" } },
+  gu: { nav: { home: "મુખ્ય", features: "વિશેષતાઓ", faqs: "પ્રશ્નો", contact: "સંપર્ક", language: "ભાષા" } },
+  kn: { nav: { home: "ಮುಖಪುಟ", features: "ವೈಶಿಷ್ಟ್ಯಗಳು", faqs: "ಪ್ರಶ್ನೆಗಳು", contact: "ಸಂಪರ್ಕಿಸಿ", language: "ಭಾಷೆ" } },
+  ml: { nav: { home: "ഹോം", features: "സവിശേഷതകൾ", faqs: "ചോദ്യങ്ങൾ", contact: "ബന്ധപ്പെടുക", language: "ഭാഷ" } },
+  pa: { nav: { home: "ਘਰ", features: "ਫੀਚਰ", faqs: "ਸਵਾਲ", contact: "ਸੰਪਰਕ", language: "ਭਾਸ਼ਾ" } },
+  or: { nav: { home: "ମୁଖ୍ୟ", features: "ବିଶେଷତା", faqs: "ପ୍ରଶ୍ନ", contact: "ଯୋଗାଯୋଗ", language: "ଭାଷା" } }
 };
 
 const I18nContext = createContext({ lang: "en", setLang: () => {}, t: (k) => k });

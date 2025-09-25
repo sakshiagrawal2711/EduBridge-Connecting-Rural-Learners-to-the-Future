@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 import { useI18n } from "../i18n/LanguageProvider";
+import { ProtectedRoute } from "../utils/auth";
 
 const dummy = [
   { id: 1, title: "Class 6 - Math: Fractions", subject: "Math", class: 6, url: "https://example.com/fractions.pdf" },
@@ -54,8 +55,8 @@ export default function StudyPage() {
   };
 
   return (
-    <>
-  <Navbar minimal />
+    <ProtectedRoute featureName="Study Materials">
+      <Navbar minimal />
       <main className="pt-20">
         <section className="section">
           <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -124,8 +125,8 @@ export default function StudyPage() {
           </div>
         </section>
       </main>
-  <Footer />
-  <LanguageSwitcher />
-    </>
+      <Footer />
+      <LanguageSwitcher />
+    </ProtectedRoute>
   );
 }
